@@ -2,13 +2,26 @@ package org.example;
 
 import java.util.Scanner;
 
+/**
+ * The Area class serves as the main controller of the program.
+ *
+ * Demonstrates:
+ *  - Object composition (uses other classes: Square, Circle, etc.)
+ *  - User input handling with Scanner
+ *  - Control structures (switch statements)
+ *  - Recursion for menu looping
+ *
+ * This class ties all shape classes together to create
+ * a functional area-calculating program.
+ */
 public class Area {
-//    Instantiate all objects
+    // Instantiate shape objects - composition (a class contains other objects)
     Square square = new Square(0);
     Rectangle rectangle = new Rectangle(0, 0);
     Triangle triangle = new Triangle(0, 0);
     Circle circle = new Circle(0);
 
+    // Variables to store user inputs
     public double Area;
     public double length;
     public double width;
@@ -16,8 +29,13 @@ public class Area {
     public double base;
     public double radius;
 
+    // Scanner for user input
     Scanner userInput = new Scanner(System.in);
 
+    /**
+     * Introduction message displayed to user at the start.
+     * Demonstrates basic text output and string formatting.
+     */
     public void introduction(){
         System.out.println("========================================\n" +
                 "        SHAPE AREA CALCULATOR\n" +
@@ -38,70 +56,76 @@ public class Area {
                 "----------------------------------------\n");
     }
 
+    /**
+     * Menu system for user input.
+     * Demonstrates:
+     *  - String comparison
+     *  - switch-case control
+     *  - User-driven logic
+     */
     public void menu() {
         System.out.println("Enter which shape you want to calculate for:\t\t Or type 'exit' to end the program");
 
         String shape = userInput.nextLine();
-        shape = shape.toLowerCase();
+        shape = shape.toLowerCase(); // makes input case-insensitive
 
+        // Switch-case logic to determine which shape to calculate
         switch (shape) {
             case "square":
-                // Get user input for dimensions
                 System.out.println("Enter the length of the square:");
                 length = userInput.nextDouble();
 
-                // Set the values and calculate the area
                 square.setLength(length);
                 Area = square.area();
 
-                // Output the result
                 System.out.println("The area of the square of length " + square.getLength() + " is: " + Area);
-                menu();
+                userInput.nextLine(); // clears buffer
+                menu(); // recursion to loop the menu
+                break;
 
             case "rectangle":
-                // Get user input for dimensions
                 System.out.println("Enter the length of the rectangle:");
                 length = userInput.nextDouble();
                 System.out.println("Enter the width of the rectangle:");
                 width = userInput.nextDouble();
 
-                // Set the values and calculate the area
                 rectangle.setLength(length);
                 rectangle.setWidth(width);
                 Area = rectangle.area();
 
-                // Output the result
-                System.out.println("The area of the rectangle of length " + rectangle.getLength() + " and width " + rectangle.getWidth() + " is: " + Area);
+                System.out.println("The area of the rectangle of length " + rectangle.getLength() +
+                        " and width " + rectangle.getWidth() + " is: " + Area);
+                userInput.nextLine();
                 menu();
+                break;
 
             case "triangle":
-                // Get user input for dimensions
                 System.out.println("Enter the base of the triangle:");
                 base = userInput.nextDouble();
                 System.out.println("Enter the height of the triangle:");
                 height = userInput.nextDouble();
 
-                // Set the values and calculate the area
                 triangle.setBase(base);
                 triangle.setHeight(height);
                 Area = triangle.area();
 
-                // Output the result
-                System.out.println("The area of the triangle of base " + triangle.getBase() + " and height " + triangle.getHeight() + " is: " + Area);
+                System.out.println("The area of the triangle of base " + triangle.getBase() +
+                        " and height " + triangle.getHeight() + " is: " + Area);
+                userInput.nextLine();
                 menu();
+                break;
 
             case "circle":
-                // Get user input for dimensions
                 System.out.println("Enter the radius of the circle:");
                 radius = userInput.nextDouble();
 
-                // Set the values and calculate the area
                 circle.setRadius(radius);
                 Area = circle.area();
 
-                // Output the result
                 System.out.println("The area of the circle of radius " + circle.getRadius() + " is: " + Area);
+                userInput.nextLine();
                 menu();
+                break;
 
             case "exit":
                 System.out.println("Thank you for using our program.");
@@ -113,10 +137,11 @@ public class Area {
         }
     }
 
-
+    /**
+     * Starts the calculator by showing the intro and launching the menu.
+     */
     public void areaCalculator(){
         introduction();
         menu();
     }
-
 }
